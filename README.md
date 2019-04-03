@@ -6,21 +6,30 @@ I'm a Funtional Programmer so my Neovim and Nixos configs are geared more twords
 
 # Things to change
 I3-gaps to BSPWM
+
 I3blocks to Lemonbar
 
 # Things to Install
 IRC Shit
+
 Android Emulator
+
 Compton
 
 # Fonts
 Cherry
+
 Siji
+
 TamzenPowerline (For ST)
 
 # Things to configure
 ST
+
 Ranger
+
 Weechat
+
 BSPWM
+
 Lemonbar
