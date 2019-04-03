@@ -1,0 +1,123 @@
+# #---Basic Definitions---# #
+for_window [class="^.*"] border pixel 2
+gaps inner 15
+gaps outer 15
+set $mod Mod4
+set $shutdown sudo -A shutdown -h now
+set $reboot sudo -A reboot
+set $hibernate sudo -A systemctl suspend
+
+# General dropdown window traits. The order can matter.
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_*"] scratchpad show
+for_window [instance="dropdown_tmuxdd"] resize set 625 450
+for_window [instance="dropdown_dropdowncalc"] resize set 800 300
+for_window [instance="dropdown_tmuxdd"] border pixel 3
+for_window [instance="dropdown_dropdowncalc"] border pixel 2
+for_window [instance="dropdown_*"] move position center
+
+# Setting the background:
+exec feh --bg-scale .config/wall.png
+
+bar {
+	font pango:mono 10
+	status_command i3blocks
+	position top
+	mode dock
+	modifier None
+}
+
+# #---Basic Bindings---# #
+bindsym $mod+Return 		exec st
+bindsym $mod+Shift+Return	exec --no-startup-id samedir
+
+bindsym $mod+Shift+space 	floating toggle
+bindsym $mod+space		focus mode_toggle
+
+bindsym $mod+Escape 	exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
+
+bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Reboot computer?" "$reboot"
+
+# #---Letter Key Bindings---# #
+bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+
+bindsym $mod+w		exec --no-startup-id firefox
+
+bindsym $mod+r 			exec st -e ranger
+
+bindsym $mod+t			split toggle
+
+bindsym $mod+i 			exec st -e htop
+
+bindsym $mod+a		exec st -e alsamixer
+
+bindsym $mod+d			exec --no-startup-id dmenu_run
+
+set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
+mode "$freeze" { bindsym $mod+Shift+f mode "default"
+}
+
+bindsym $mod+f			fullscreen toggle
+bindsym $mod+Shift+f		mode "$freeze" ;; exec --no-startup-id notify-send "<b>Distraction-free mode activated.</b> Press Super+Shift+f to return."
+
+bindsym $mod+g			workspace prev
+bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
+
+bindsym $mod+h			focus left
+
+bindsym $mod+j			focus down
+
+bindsym $mod+k			focus up
+
+bindsym $mod+l			focus right
+
+bindsym $mod+b			bar mode toggle
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1		workspace $ws1
+bindsym $mod+2		workspace $ws2
+bindsym $mod+3		workspace $ws3
+bindsym $mod+4		workspace $ws4
+bindsym $mod+5		workspace $ws5
+bindsym $mod+6		workspace $ws6
+bindsym $mod+7		workspace $ws7
+bindsym $mod+8		workspace $ws8
+bindsym $mod+9		workspace $ws9
+bindsym $mod+0		workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1	move container to workspace $ws1
+bindsym $mod+Shift+2	move container to workspace $ws2
+bindsym $mod+Shift+3	move container to workspace $ws3
+bindsym $mod+Shift+4	move container to workspace $ws4
+bindsym $mod+Shift+5	move container to workspace $ws5
+bindsym $mod+Shift+6	move container to workspace $ws6
+bindsym $mod+Shift+7	move container to workspace $ws7
+bindsym $mod+Shift+8	move container to workspace $ws8
+bindsym $mod+Shift+9	move container to workspace $ws9
+bindsym $mod+Shift+0	move container to workspace $ws10
+
+# #---Function Buttons---# #
+bindsym $mod+F1		exec st -e sudo bash programming/scripts/wifi/wifi.sh
+bindsym $mod+F2		restart
+bindsym $mod+F3		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
+bindsym $mod+F4  	exec --no-startup-id ducksearch
+
+# #---Arrow Keys---# #
+bindsym $mod+Left		focus left
+bindsym $mod+Down		focus down
+bindsym $mod+Up			focus up
+bindsym $mod+Right 		focus right
