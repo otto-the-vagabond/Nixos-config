@@ -20,11 +20,9 @@ Android Emulator
 Compton
 
 # Fonts
-Cherry
+cm_unicode
 
 Siji
-
-TamzenPowerline (For ST)
 
 # Things to configure
 ST
